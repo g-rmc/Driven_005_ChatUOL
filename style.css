@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {box-sizing: border-box;}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: black;
+    max-width: 600px;
+    min-width: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* TOPO */
+
+.topo {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    position: fixed;
+    top: 0;
+    left: calc(50vw - width/2);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.topo img {
+    width: 75px;
+}
+
+.topo ion-icon {
+    font-size: 45px;
+    cursor: pointer;
+}
+
+/* BASE */
+
+.base {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    position: fixed;
+    bottom: 0;
+    left: calc(50vw - width/2);
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.base input {
+    height: 40px;
+    width: 100%;
+    margin-right: 25px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    border: none;
+}
+
+.base ion-icon {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* CHAT */
+
+.chat {
+    background-color: #e5e5e5;
+    height: 100%;
+    min-height: calc(100vh - 160px);
+    margin: 80px 0;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.chat p {
+    font-weight: 400;
+}
+
+.chat b {
+    font-weight: 700;
+}
+
+.chat em {
+    font-weight: 400;
+    color: #aaaaaa;
+}
+
+.chat div {
+    padding: 12px 8px;
+    margin: 6px 0;
+}
+
+.mensagem-status{
+    background-color: #dcdcdc;
+}
+
+.mensagem-normal{
+    background-color: #ffffff;
+}
+
+.mensagem-reservada{
+    background-color: #ffdede;
+}
