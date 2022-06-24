@@ -17,7 +17,8 @@ function start() {
 
 function nomeValido(sinal) {
     console.log(sinal);
-    alert ('Deu bom');
+    alert ('Bem-vinde ;*');
+    setInterval(aindaAtivo, 5000);
 }
 
 function nomeInvalido(sinal) {
@@ -33,7 +34,17 @@ function nomeInvalido(sinal) {
 
 start();
 
-// PROXIMA FUNÇÃO
+// MANTER CONEXÃO ATIVA
+
+function aindaAtivo(){
+    const promise = axios.post(
+        "https://mock-api.driven.com.br/api/v6/uol/status",
+        {name: nome}
+    );
+}
+
+
+// ATUALIZAR O CHAT
 
 
 function refresh() {
