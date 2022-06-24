@@ -96,16 +96,21 @@ body {
 .chat div {
     padding: 12px 8px;
     margin: 6px 0;
+    word-break: break-all;
 }
 
-.mensagem-status{
+.status{
     background-color: #dcdcdc;
 }
 
-.mensagem-normal{
+.message{
     background-color: #ffffff;
 }
 
-.mensagem-reservada{
+.private_message{
     background-color: #ffdede;
+}
+
+.chat:nth-child(99) {
+    color: yellow;
 }
