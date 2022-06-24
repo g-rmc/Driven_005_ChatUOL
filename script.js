@@ -3,8 +3,8 @@ let nome;
 // CADASTRO DO USUÁRIO
 
 function start() {
-    nome = prompt("Digite seu lindo nome:");
-    
+    nome = document.querySelector(".input-nome").value;
+
     const promise = axios.post(
         "https://mock-api.driven.com.br/api/v6/uol/participants",
         {name: nome}
@@ -14,24 +14,22 @@ function start() {
 }
 
 function nomeValido() {
-    alert ('Bem-vinde ;D');
     carregarMensagem();
     setInterval(aindaAtivo, 5000);
     setInterval(carregarMensagem, 3000);
+    document.querySelector(".tela-inicial").classList.add("hidden");
 }
 
 function nomeInvalido(sinal) {
     let status = (sinal.response.status);
     if (status === 400) {
-        alert (`Este nome já está sendo usado, tente novamente :P`);
-        start();
+        // alert (`Este nome já está sendo usado, tente novamente :P`);
+        // start();
     } else {
         alert (`Oh no! Erro ${status} encontrado x.x`);
         start();
     }
 }
-
-start();
 
 // MANTER CONEXÃO ATIVA
 
@@ -53,33 +51,35 @@ function printPosts (array){
     let NumMensagens = array.data.length;
     let chat = document.querySelector(".chat")
     chat.innerHTML = "";
-    
+
     for (let i = 0; i < NumMensagens; i++){
 
         let post = array.data[i];
         let divMensagem;
 
         if (post.type === "status") {
-            
-            divMensagem = 
+
+            divMensagem =
             `<div class="${post.type}">
                 <p><em>(${post.time})</em> <b>${post.from}</b> ${post.text}</p>
             </div>`
 
         } else if (post.type === "message") {
-            
-            divMensagem = 
+
+            divMensagem =
             `<div class="${post.type}">
                 <p><em>(${post.time})</em> <b>${post.from}</b> para <b>${post.to}</b>: ${post.text}</p>
             </div>`
 
         } else if (post.type === "private_message" && post.to === nome) {
 
-            divMensagem = 
+            divMensagem =
             `<div class="${post.type}">
                 <p><em>(${post.time})</em> <b>${post.from}</b> reservadamente para <b>${post.to}</b>: ${post.text}</p>
             </div>`
 
+        } else {
+            divMensagem = '<div class="hidden"></div>'
         }
 
         chat.innerHTML += divMensagem;
@@ -111,7 +111,7 @@ function postar() {
             text: mensagem.value,
             type: "message" // ou "private_message" para o bônus
         }
-    
+
         let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', post);
         promise.then(carregarMensagem);
         promise.catch(window.location.reload);
@@ -120,6 +120,6 @@ function postar() {
 
     }
 
-    
+
 
 }
