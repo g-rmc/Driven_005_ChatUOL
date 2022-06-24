@@ -5,7 +5,6 @@ let nome;
 function start() {
     nome = prompt("Digite seu lindo nome:");
     
-    console.log(nome);
     const promise = axios.post(
         "https://mock-api.driven.com.br/api/v6/uol/participants",
         {name: nome}
@@ -15,7 +14,7 @@ function start() {
 }
 
 function nomeValido() {
-    alert ('Bem-vinde ;*');
+    alert ('Bem-vinde ;D');
     carregarMensagem();
     setInterval(aindaAtivo, 5000);
     setInterval(carregarMensagem, 3000);
@@ -74,8 +73,8 @@ function printPosts (array){
                 <p><em>(${post.time})</em> <b>${post.from}</b> para <b>${post.to}</b>: ${post.text}</p>
             </div>`
 
-        } else if (post.type === "private_message") {
-            
+        } else if (post.type === "private_message" && post.to === nome) {
+
             divMensagem = 
             `<div class="${post.type}">
                 <p><em>(${post.time})</em> <b>${post.from}</b> reservadamente para <b>${post.to}</b>: ${post.text}</p>
@@ -87,8 +86,40 @@ function printPosts (array){
 
     }
 
-    let ultimoPost = document.querySelector(".chat :nth-child(100)");
+
+    // Filtro do último post
+
+    let feed = document.querySelectorAll (".chat div");
+    let ultimoPost = feed[feed.length-1];
 
     ultimoPost.scrollIntoView();
+
+}
+
+// ENVIAR MENSAGEM
+
+function postar() {
+
+    let mensagem = document.querySelector(".input-mensagem");
+
+    if (mensagem !== ""){
+
+
+        let post = {
+            from: nome,
+            to: "Todos", // ou alguém específico
+            text: mensagem.value,
+            type: "message" // ou "private_message" para o bônus
+        }
+    
+        let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', post);
+        promise.then(carregarMensagem);
+        promise.catch(window.location.reload);
+
+        mensagem.value = "";
+
+    }
+
+    
 
 }

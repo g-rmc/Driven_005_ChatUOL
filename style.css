@@ -54,7 +54,12 @@ body {
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.base input {
+.base ion-icon {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.input-mensagem {
     height: 40px;
     width: 100%;
     margin-right: 25px;
@@ -62,11 +67,6 @@ body {
     font-size: 18px;
     line-height: 21px;
     border: none;
-}
-
-.base ion-icon {
-    font-size: 25px;
-    cursor: pointer;
 }
 
 /* CHAT */
