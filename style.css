@@ -131,7 +131,7 @@ body {
     align-items: center;
 }
 
-.tela-inicial img {
+.tela-inicial > img {
     width: 130px;
     margin: 100px 0;
 }
@@ -162,6 +162,23 @@ body {
 
 .tela-inicial button:active {
     background-color: #bdbdbd;
+}
+
+.carregando {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carregando img {
+    width: 150px;
+    border-radius: 50%;
+}
+
+.carregando h1 {
+    margin: 20px 0;
+    font-weight: 500;
+    color: #696969;
 }
 
 .hidden {

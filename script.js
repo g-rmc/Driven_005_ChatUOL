@@ -14,17 +14,17 @@ function start() {
 }
 
 function nomeValido() {
+    telaCarregamento();
     carregarMensagem();
     setInterval(aindaAtivo, 5000);
     setInterval(carregarMensagem, 3000);
-    document.querySelector(".tela-inicial").classList.add("hidden");
 }
 
 function nomeInvalido(sinal) {
     let status = (sinal.response.status);
     if (status === 400) {
-        // alert (`Este nome já está sendo usado, tente novamente :P`);
-        // start();
+        alert (`Este nome já está sendo usado, tente novamente :P`);
+        start();
     } else {
         alert (`Oh no! Erro ${status} encontrado x.x`);
         start();
@@ -120,6 +120,19 @@ function postar() {
 
     }
 
+}
 
+// BÔNUS: TELA DE ENTRADA
 
+function telaCarregamento() {
+
+    document.querySelector(".input-nome").classList.add("hidden");
+    document.querySelector(".tela-inicial button").classList.add("hidden");
+    document.querySelector(".carregando").classList.remove("hidden");
+
+    setTimeout(liberarEntrada,1500);
+}
+
+function liberarEntrada() {
+    document.querySelector(".tela-inicial").classList.add("hidden");
 }
