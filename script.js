@@ -24,10 +24,8 @@ function nomeInvalido(sinal) {
     let status = (sinal.response.status);
     if (status === 400) {
         alert (`Este nome já está sendo usado, tente novamente :P`);
-        start();
     } else {
         alert (`Oh no! Erro ${status} encontrado x.x`);
-        start();
     }
 }
 
@@ -71,7 +69,7 @@ function printPosts (array){
                 <p><em>(${post.time})</em> <b>${post.from}</b> para <b>${post.to}</b>: ${post.text}</p>
             </div>`
 
-        } else if (post.type === "private_message" && post.to === nome) {
+        } else if (post.type === "private_message" && (post.to === nome || post.from === nome)) {
 
             divMensagem =
             `<div class="${post.type}">
@@ -136,3 +134,17 @@ function telaCarregamento() {
 function liberarEntrada() {
     document.querySelector(".tela-inicial").classList.add("hidden");
 }
+
+// BÔNUS: ENVIAR COM ENTER
+
+document.querySelector(".input-nome").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {  
+        start();
+    }
+  });
+
+document.querySelector(".input-mensagem").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {  
+        postar();
+    }
+  });

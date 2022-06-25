@@ -59,14 +59,25 @@ body {
     cursor: pointer;
 }
 
-.input-mensagem {
-    height: 40px;
+.base div {
     width: 100%;
+}
+
+.input-mensagem {
+    height: 30px;
+    width: inherit;
     margin-right: 25px;
     font-weight: 400;
     font-size: 16px;
     line-height: 21px;
     border: none;
+}
+
+.base h2 {
+    width: inherit;
+    font-size: 12px;
+    color: #696969;
+    margin: 5px 0
 }
 
 /* CHAT */
