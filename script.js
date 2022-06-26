@@ -148,3 +148,6 @@ document.querySelector(".input-mensagem").addEventListener("keydown", function (
         postar();
     }
   });
+
+// BÔNUS: PARTICIPANTES ATIVOS
+
