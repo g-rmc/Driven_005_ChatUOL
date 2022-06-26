@@ -206,10 +206,16 @@ body {
 .participantes {
     background-color: rgba(255, 255, 255, 1);
     width: 70%;
-    height: 100vh;
+    height: inherit;
     max-width: 400px;
     min-width: 220px;
     padding: 20px;
+}
+
+.contatos {
+    height: 50%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .contatos > div, .visibilidade > div {
@@ -223,7 +229,7 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
     width: 40%;
     max-width: 200px;
-    height: 100%;
+    height: inherit;
 }
 
 .participantes h1 {
@@ -248,6 +254,14 @@ body {
 
 .participantes ion-icon{
     font-size: 22px;
+}
+
+.contato :nth-child(3), .publico :nth-child(3), .reservadamente :nth-child(3) {
+    color: #ffffff;
+}
+
+.selecionado :nth-child(3){
+    color: green;
 }
 
 /* GLOBAL */

@@ -1,4 +1,6 @@
-let nome;
+let nome, selecionado;
+let tipoMensagem = "message";
+
 
 // CADASTRO DO USUÁRIO
 
@@ -109,7 +111,7 @@ function postar() {
             from: nome,
             to: "Todos", // ou alguém específico
             text: mensagem.value,
-            type: "message" // ou "private_message" para o bônus
+            type: tipoMensagem
         }
 
         let promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', post);
@@ -168,9 +170,7 @@ function printParticipantes(array) {
     let lista = document.querySelector(".contatos")
     lista.innerHTML = `
     
-        <h1>Escolha um contato</br>para enviar a mensagem:</h1>
-
-        <div class="contato">
+        <div class="contato selecionado" onclick="selecionarNome(this)">
         <ion-icon name="people"></ion-icon>
         <h2>Todos</h2>
         <ion-icon name="checkmark-outline"></ion-icon>
@@ -183,7 +183,7 @@ function printParticipantes(array) {
         let participante = array.data[i];
         let divContato = `
 
-        <div class="contato">
+        <div class="contato" onclick="selecionarNome(this)">
             <ion-icon name="person-circle"></ion-icon>
             <h2>${participante.name}</h2>
             <ion-icon name="checkmark-outline"></ion-icon>
@@ -192,6 +192,43 @@ function printParticipantes(array) {
         `;
 
         lista.innerHTML += divContato;
+    }
+
+}
+
+function selecionarNome(div) {
+
+    selecionado = div.querySelector("h2").innerHTML;
+
+    console.log(selecionado);
+
+    div.classList.toggle('selecionado');
+
+    let nomePai = div.parentNode.className;
+
+    let array = document.querySelectorAll(`.${nomePai} > div`);
+
+}
+
+function selecionarVisibilidade(div) {
+
+    document.querySelector(".publico").classList.remove('selecionado');
+    document.querySelector(".reservadamente").classList.remove('selecionado');
+    
+    div.classList.add('selecionado');
+
+    let visibilidade = div.querySelector("h2").innerHTML;
+
+    if (visibilidade === "Reservadamente"){
+
+        tipoMensagem = "private_message";
+        document.querySelector(".base h2").innerHTML = `Enviando para NOME (reservadamente)`
+
+    } else {
+
+        tipoMensagem = "message";
+        document.querySelector(".base h2").innerHTML = `Enviando para NOME`
+
     }
 
 }
