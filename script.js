@@ -16,8 +16,10 @@ function start() {
 function nomeValido() {
     telaCarregamento();
     carregarMensagem();
+    carregarParticipantes();
     setInterval(aindaAtivo, 5000);
     setInterval(carregarMensagem, 3000);
+    setInterval(carregarParticipantes, 10000);
 }
 
 function nomeInvalido(sinal) {
@@ -151,3 +153,45 @@ document.querySelector(".input-mensagem").addEventListener("keydown", function (
 
 // BÔNUS: PARTICIPANTES ATIVOS
 
+function ativarTelaParticipantes() {
+    document.querySelector(".tela-participantes").classList.toggle('hidden')
+}
+
+function carregarParticipantes() {
+    let promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+    promise.then(printParticipantes);
+}
+
+function printParticipantes(array) {
+
+    let NumParticipantes = array.data.length;
+    let lista = document.querySelector(".contatos")
+    lista.innerHTML = `
+    
+        <h1>Escolha um contato</br>para enviar a mensagem:</h1>
+
+        <div class="contato">
+        <ion-icon name="people"></ion-icon>
+        <h2>Todos</h2>
+        <ion-icon name="checkmark-outline"></ion-icon>
+        </div>
+    
+    `;
+
+    for (let i = 0; i < NumParticipantes; i++){
+
+        let participante = array.data[i];
+        let divContato = `
+
+        <div class="contato">
+            <ion-icon name="person-circle"></ion-icon>
+            <h2>${participante.name}</h2>
+            <ion-icon name="checkmark-outline"></ion-icon>
+        </div>
+
+        `;
+
+        lista.innerHTML += divContato;
+    }
+
+}
