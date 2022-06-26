@@ -1,5 +1,6 @@
-let nome, selecionado;
+let nome;
 let tipoMensagem = "message";
+let nomeSelecionado = "Todos";
 
 
 // CADASTRO DO USUÁRIO
@@ -109,7 +110,7 @@ function postar() {
 
         let post = {
             from: nome,
-            to: "Todos", // ou alguém específico
+            to: nomeSelecionado,
             text: mensagem.value,
             type: tipoMensagem
         }
@@ -166,47 +167,66 @@ function carregarParticipantes() {
 
 function printParticipantes(array) {
 
-    let NumParticipantes = array.data.length;
-    let lista = document.querySelector(".contatos")
-    lista.innerHTML = `
-    
-        <div class="contato selecionado" onclick="selecionarNome(this)">
-        <ion-icon name="people"></ion-icon>
-        <h2>Todos</h2>
-        <ion-icon name="checkmark-outline"></ion-icon>
-        </div>
-    
-    `;
+    let primeiroItem = [{name: "Todos"}];
+    let listaParticipantes = primeiroItem.concat(array.data);
+    let NumParticipantes = listaParticipantes.length;
+    let lista = document.querySelector(".contatos");
+
+    lista.innerHTML = "";
 
     for (let i = 0; i < NumParticipantes; i++){
 
-        let participante = array.data[i];
-        let divContato = `
+        let participante = listaParticipantes[i];
+        let divContato;
 
-        <div class="contato" onclick="selecionarNome(this)">
-            <ion-icon name="person-circle"></ion-icon>
-            <h2>${participante.name}</h2>
-            <ion-icon name="checkmark-outline"></ion-icon>
-        </div>
+        if (participante.name !== nomeSelecionado){
 
-        `;
+            divContato = `
+
+            <div class="contato" onclick="selecionarNome(this)">
+                <ion-icon name="person-circle"></ion-icon>
+                <h2>${participante.name}</h2>
+                <ion-icon name="checkmark-outline"></ion-icon>
+            </div>
+
+            `;
+
+        } else {
+            
+            divContato = `
+
+            <div class="contato selecionado" onclick="selecionarNome(this)">
+                <ion-icon name="person-circle"></ion-icon>
+                <h2>${participante.name}</h2>
+                <ion-icon name="checkmark-outline"></ion-icon>
+            </div>
+
+            `;
+
+        }
 
         lista.innerHTML += divContato;
+    }
+
+    let divNome = document.querySelector(".contatos .selecionado");
+    if (divNome === null){
+        document.querySelector(".contatos :nth-child(1)").classList.add("selecionado");
+        nomeSelecionado = "Todos";
+        document.querySelector(".base h2").innerHTML = `Enviando para ${nomeSelecionado}`
     }
 
 }
 
 function selecionarNome(div) {
 
-    selecionado = div.querySelector("h2").innerHTML;
-
-    console.log(selecionado);
-
+    let divNome = document.querySelector(".contatos .selecionado");
+    if (divNome !== null){
+        divNome.classList.remove("selecionado");
+    }
     div.classList.toggle('selecionado');
 
-    let nomePai = div.parentNode.className;
-
-    let array = document.querySelectorAll(`.${nomePai} > div`);
+    nomeSelecionado = div.querySelector("h2").innerHTML;
+    document.querySelector(".base h2").innerHTML = `Enviando para ${nomeSelecionado}`
 
 }
 
@@ -222,12 +242,12 @@ function selecionarVisibilidade(div) {
     if (visibilidade === "Reservadamente"){
 
         tipoMensagem = "private_message";
-        document.querySelector(".base h2").innerHTML = `Enviando para NOME (reservadamente)`
+        document.querySelector(".base h2").innerHTML = `Enviando para ${nomeSelecionado} (reservadamente)`
 
     } else {
 
         tipoMensagem = "message";
-        document.querySelector(".base h2").innerHTML = `Enviando para NOME`
+        document.querySelector(".base h2").innerHTML = `Enviando para ${nomeSelecionado}`
 
     }
 
